@@ -1,0 +1,21 @@
+{
+  "name": "spiral",
+  "version": "0.5.0",
+  "description": "Simple RESTful API framework for Node.js build on the top of Express.",
+  "private": true,
+  "scripts": {
+    "postinstall": "tsd install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kwiniarski/spiral-ts.git"
+  },
+  "author": "Krzysztof Winiarski <krzysiek@codilogy.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "tsd": "latest",
+    "chai": "latest",
+    "mocha": "latest",
+    "typescript": "latest"
+  }
+}
