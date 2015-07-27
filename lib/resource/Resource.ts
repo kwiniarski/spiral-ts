@@ -1,4 +1,4 @@
-export class Resource {
+export default class Resource {
 
   constructor(basePath:string) {
     this.basePath = basePath;

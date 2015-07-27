@@ -1,36 +1,18 @@
-import {Resource} from "../../lib/resource/Resource"
+import Resource from "./Resource"
+import {Mount, Definitions} from "./Commons"
+import {mixin} from "../decorators"
 
-class Definitions extends Resource {
-  resources: Resource[] = [];
-  definitions = [];
-  securityDefinitions = [];
-  mount(resource: Resource) {
-    this.assign(resource);
-    this.resources.push(resource);
-  }
-}
-
-
-@Mixin(Definitions)
-export class Root extends Resource implements Definitions {
+@mixin(Mount, Definitions)
+class Root extends Resource implements Mount, Definitions {
   private swagger = '2.0';
 
-  // implement minimal Definitions interface to satisfy compiler
+  // implement minimal Mount interface to satisfy compiler
   resources: Resource[] = [];
+  mount: (resource: Resource) => void;
+
+  // implement minimal Definitions interface to satisfy compiler
   definitions = [];
   securityDefinitions = [];
-  mount: (resource: Resource) => void;
 }
 
-
-function Mixin(...implementations) {
-  return (target) => {
-    implementations.forEach(implementation => {
-      Object.getOwnPropertyNames(implementation.prototype).forEach(property => {
-          target.prototype[property] = implementation.prototype[property];
-      });
-    });
-  }
-}
-
-
+export default Root

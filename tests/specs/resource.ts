@@ -1,10 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import {expect} from "chai"
-import {Resource} from "../../lib/resource/Resource"
-import {Root} from "../../lib/resource/Root"
-
-var x = new Root('/');
-console.log(x);
+import Resource from "../../lib/resource/Resource"
+import Root from "../../lib/resource/Root"
 
 describe('Resource', () => {
 
