@@ -1,18 +1,19 @@
-import Resource from "./Resource"
-import {Mount, Definitions} from "./Commons"
-import {mixin} from "../decorators"
+import ResourceBase from './Base'
+import {IResourceMountable, IResourceDefinitions} from './Interface'
 
-@mixin(Mount, Definitions)
-class Root extends Resource implements Mount, Definitions {
-  private swagger = '2.0';
+export default class ResourceRoot extends ResourceBase
+implements IResourceMountable<ResourceBase>, IResourceDefinitions {
 
-  // implement minimal Mount interface to satisfy compiler
-  resources: Resource[] = [];
-  mount: (resource: Resource) => void;
-
-  // implement minimal Definitions interface to satisfy compiler
   definitions = [];
+
   securityDefinitions = [];
+
+  resources: ResourceBase[] = [];
+
+  mount(resource:ResourceBase):void {
+    this.assign(resource);
+    this.resources.push(resource);
+  }
+
 }
 
-export default Root

@@ -4,7 +4,7 @@
   "description": "Simple RESTful API framework for Node.js build on the top of Express.",
   "private": true,
   "scripts": {
-    "postinstall": "tsd install"
+    "postinstall": "node_modules/.bin/tsd install"
   },
   "repository": {
     "type": "git",
@@ -13,9 +13,14 @@
   "author": "Krzysztof Winiarski <krzysiek@codilogy.com>",
   "license": "MIT",
   "devDependencies": {
-    "tsd": "latest",
     "chai": "latest",
-    "mocha": "latest",
-    "typescript": "latest"
+    "del": "latest",
+    "gulp": "latest",
+    "gulp-mocha": "latest",
+    "gulp-tsconfig": "latest",
+    "gulp-tslint": "latest",
+    "gulp-typedoc": "latest",
+    "gulp-typescript": "latest",
+    "tsd": "latest"
   }
 }

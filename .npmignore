@@ -8,6 +8,6 @@ node_modules/
 npm-debug.log
 
 # project files
-lib/**/*.js*
-tests/**/*.js*
+**/*.ts
 typings/
+tests/
