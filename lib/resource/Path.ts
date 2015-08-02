@@ -1,7 +1,7 @@
 import ResourceBase from './Base'
-import ResourcePath from './Path'
+import {IResourceContainer, IResourceDefinitions} from './Interface'
 
-class ResourceRoot extends ResourcePath {
+class ResourcePath extends ResourceBase implements IResourceContainer<ResourceBase>, IResourceDefinitions {
 
   definitions = [];
 
@@ -16,4 +16,4 @@ class ResourceRoot extends ResourcePath {
 
 }
 
-export default ResourceRoot
+export default ResourcePath

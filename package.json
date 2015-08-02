@@ -4,7 +4,8 @@
   "description": "Simple RESTful API framework for Node.js build on the top of Express.",
   "private": true,
   "scripts": {
-    "postinstall": "node_modules/.bin/tsd install"
+    "test": "gulp test",
+    "postinstall": "tsd install"
   },
   "repository": {
     "type": "git",
@@ -16,11 +17,12 @@
     "chai": "latest",
     "del": "latest",
     "gulp": "latest",
+    "gulp-debug": "latest",
     "gulp-mocha": "latest",
     "gulp-tsconfig": "latest",
     "gulp-tslint": "latest",
-    "gulp-typedoc": "latest",
     "gulp-typescript": "latest",
-    "tsd": "latest"
+    "tsd": "latest",
+    "vinyl-paths": "latest"
   }
 }

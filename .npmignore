@@ -3,10 +3,6 @@
 # Visual Studio Code project settings folder
 .settings/
 
-# npm stuff
-node_modules/
-npm-debug.log
-
 # project files
 **/*.ts
 typings/

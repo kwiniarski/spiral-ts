@@ -1,12 +1,17 @@
 {
     "compilerOptions": {
+        "outDir": "lib",
         "module": "commonjs",
         "target": "ES5",
         "sourceMap": true,
         "removeComments": false,
         "experimentalDecorators": true
     },
-    "files": ["lib/resource/Base.ts", "lib/resource/index.ts",
-        "lib/resource/Interface.ts", "lib/resource/Root.ts"
+    "files": [
+      "lib/resource/Base.ts",
+      "lib/resource/index.ts",
+      "lib/resource/Interface.ts",
+      "lib/resource/Path.ts",
+      "lib/resource/Root.ts"
     ]
 }

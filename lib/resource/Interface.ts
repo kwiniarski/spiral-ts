@@ -89,7 +89,7 @@ export interface IResourceDefinitions {
  * Defines interface for resources which can mount additional
  * resources. This applies to ResourceRoot and ResourcePath.
  */
-export interface IResourceMountable<T> {
+export interface IResourceContainer<T> {
 
   /**
    * List of mounted resources.

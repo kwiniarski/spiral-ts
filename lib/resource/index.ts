@@ -5,3 +5,4 @@ export namespace resource {
     return new ResourceRoot('ss')
   }
 }
+

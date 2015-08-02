@@ -1,7 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import {expect} from 'chai'
 import ResourceBase from '../../lib/resource/Base'
-import ResourceRoot from '../../lib/resource/Root'
+import ResourcePath from '../../lib/resource/Path'
 
 describe('ResourceBase', () => {
 
@@ -47,13 +47,13 @@ describe('ResourceBase', () => {
 });
 
 
-describe('ResourceRoot', () => {
+describe('ResourcePath', () => {
   describe('#mount', () => {
 
     var a, b;
 
     beforeEach(() => {
-      a = new ResourceRoot('/v1');
+      a = new ResourcePath('/v1');
       b = new ResourceBase('/services');
 
       a.mount(b);
