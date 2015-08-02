@@ -1,5 +1,5 @@
-import ResourceBase from './Base'
-import {IResourceContainer, IResourceDefinitions} from './Interface'
+import ResourceBase from './base'
+import {IResourceContainer, IResourceDefinitions} from './interface'
 
 class ResourcePath extends ResourceBase implements IResourceContainer<ResourceBase>, IResourceDefinitions {
 

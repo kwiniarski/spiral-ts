@@ -8,10 +8,10 @@
         "experimentalDecorators": true
     },
     "files": [
-      "lib/resource/Base.ts",
+      "lib/resource/base.ts",
       "lib/resource/index.ts",
-      "lib/resource/Interface.ts",
-      "lib/resource/Path.ts",
-      "lib/resource/Root.ts"
+      "lib/resource/interface.ts",
+      "lib/resource/path.ts",
+      "lib/resource/root.ts"
     ]
 }
