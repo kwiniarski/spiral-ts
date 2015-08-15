@@ -22,7 +22,12 @@
     "gulp-tsconfig": "latest",
     "gulp-tslint": "latest",
     "gulp-typescript": "latest",
+    "sinon": "latest",
     "tsd": "latest",
     "vinyl-paths": "latest"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "lodash": "^3.10.1"
   }
 }

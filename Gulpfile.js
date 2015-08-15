@@ -14,7 +14,8 @@ var tsCompilerOptions = {
     'target': 'ES5',
     'sourceMap': true,
     'removeComments': false,
-    'experimentalDecorators': true					
+    'experimentalDecorators': true,
+    'emitDecoratorMetadata': true
 };
 var tsConfigTask = tsConfig({
 	tsOrder: src,
