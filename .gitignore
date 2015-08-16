@@ -1,7 +1,13 @@
 # WebStorm project settings folder
 .idea/
-# Visual Studio Code project settings folder
+# Visual Studio project settings folder
 .settings/
+.vs/
+bin/
+obj/
+
+.ntvs_analysis.dat
+*.njsproj
 
 # npm stuff
 node_modules/
