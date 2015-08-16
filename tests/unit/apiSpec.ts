@@ -1,7 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 import {expect} from 'chai'
 import {inspect} from 'util'
-import api from '../../lib/api'
+import API from '../../lib/api'
 
 let log = (data) => {
   console.log(inspect(data, {
@@ -12,14 +12,22 @@ let log = (data) => {
 };
 
 describe('API', () => {
+
+  var handler, api, root;
+
+  beforeEach(() => {
+    api = API();
+    handler = (req, res, next) => {};
+  });
+
   describe('every resource object', () => {
 
     var a, b, c;
 
     beforeEach(function () {
-      a = api.path('/v1');
-      b = api.path('/services');
-      c = api.path('/mail');
+      a = api.path({ basePath: '/v1' });
+      b = api.path({ basePath: '/services' });
+      c = api.path({ basePath: '/mail' });
 
       a.assign(b);
       b.assign(c);
@@ -53,6 +61,21 @@ describe('API', () => {
         }).to.throw(Error);
       });
     });
+
+    describe('#parameters', () => {
+      it('should return all parameters definitions from current path', () => {
+        let a = api.path({ basePath: '/v1' });
+        let b = api.path({ basePath: '/books/:id', parameters: [ api.operation.parameter('id') ] });
+        let c = api.operation({ basePath: '/list/:type', parameters: [ api.operation.parameter('type') ], handler: handler });
+
+        a.mount(b);
+        b.mount(c);
+
+        expect(b.parameters).to.have.length(1);
+        expect(c.parameters).to.have.length(2);
+      });
+    });
+
   });
 
   describe('factory (root object)', () => {
@@ -61,8 +84,8 @@ describe('API', () => {
       var a, b;
 
       it('cannot be assigned to any resource', () => {
-        a = api('/v1');
-        b = api.path('/services');
+        a = api({ basePath: '/v1' });
+        b = api.path({ basePath: '/services' });
 
         expect(() => {
           b.assign(a);
@@ -71,14 +94,14 @@ describe('API', () => {
     });
   });
 
-  describe('#path factory', () => {
+  describe('#path', () => {
     describe('#mount', () => {
 
       var a, b;
 
       beforeEach(() => {
-        a = api.path('/v1');
-        b = api.path('/services');
+        a = api.path({ basePath: '/v1' });
+        b = api.path({ basePath: '/services' });
 
         a.mount(b);
       });
@@ -88,17 +111,27 @@ describe('API', () => {
       });
       it('should set mounting resource as a parent of mounted resource', () => {
         expect(b).to.have.property('parent', a);
-      })
+      });
+      it('should throw exception if mounting path is ambiguous', () => {
+        a = api.path({ basePath: '/' });
+        b = api.path({ basePath: '/' });
+        expect(() => {
+          a.mount(b);
+        }).to.throw();
+      });
     });
   });
 
-  describe('#operation factory', () => {
+  describe('#operation', () => {
 
-    var a, b, handler = (req, res, next) => {};
+    var a, b;
 
     beforeEach(() => {
-      a = api.operation(handler);
-      b = api.path('/');
+      b = api.path({ basePath: '/v1' });
+      a = api.operation({
+        basePath: '/status/service',
+        handler: handler
+      });
     });
 
     describe('#method', () => {
@@ -107,31 +140,38 @@ describe('API', () => {
       });
       it('should throw error on unsupported HTTP verb', () => {
         expect(() => {
-          a.method = 'X-GET';
+          a.method = 'X';
         });
         expect(() => {
           api.operation({
-            method: 'X-GET',
+            method: 'X',
             handler: handler
           })
         }).to.throw();
-
       });
     });
 
-    describe('#fetch', () => {
-      it('should return all created operations', () => {
-        //var x = api.operation.fetch();
-        //for (let item of api.operation.fetch()) {
-        //  log(item);
-        //}
-        api.operation.each(item => log(item));
-
-        //log(x.next());
-        //log(x.next());
-        //log(x.next());
-        //log(x.next());
-      });
+    it('should not be added to the list of all operations before mount', () => {
+      expect(api.operations.size).to.equal(0);
+    });
+    it('should be added to the list of all operations after mount', () => {
+      b.mount(a);
+      expect(api.operations.size).to.equal(1);
+    });
+    it('should throw error if one of required parameters is not defined', () => {
+      b = api.path({ basePath: '/users/:user' });
+      a = api.operation({ basePath: '/access/:type', handler: handler });
+      expect(a.parameters).to.have.length(0);
+      expect(() => {
+        b.mount(a);
+      }).to.throw();
+    });
+    it('should throw error if parameter is defined more then once', () => {
+      b = api.path({ basePath: '/users/:id', parameters: [ api.operation.parameter('id') ] });
+      a = api.operation({ basePath: '/access/:id', parameters: [ api.operation.parameter('id') ], handler: handler });
+      expect(() => {
+        b.mount(a);
+      }).to.throw();
     });
 
   });
